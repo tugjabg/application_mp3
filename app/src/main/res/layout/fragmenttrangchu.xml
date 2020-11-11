@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <fragment
+            android:name="com.example.applicationmp3.Fragment.fragmentBanner"
+            android:id="@+id/fragmentBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.applicationmp3.Fragment.FragmentPlayList"
+            android:id="@+id/fragmentPlayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.applicationmp3.Fragment.fragmentChudeTheLoai"
+            android:layout_width="match_parent"
+            android:id="@+id/fragmentChuDeTheLoai"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
