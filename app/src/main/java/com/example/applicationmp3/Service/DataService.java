@@ -1,5 +1,6 @@
 package com.example.applicationmp3.Service;
 
+import com.example.applicationmp3.Model.Album;
 import com.example.applicationmp3.Model.ChuDeTheLoai;
 import com.example.applicationmp3.Model.PlayList;
 import com.example.applicationmp3.Model.Quangcao;
@@ -16,4 +17,6 @@ public interface DataService { // lấy data từ service
     Call<List<PlayList>> GetPlayListCurrentDay(); // getPlayListCurrent giống như tên function để nhận dữ liệu
     @GET("chudeTheLoai.php")
     Call<ChuDeTheLoai> GetChuDeTheLoai();
+    @GET("albumHot.php")
+    Call<List<Album>> getAlbumHot();
 }

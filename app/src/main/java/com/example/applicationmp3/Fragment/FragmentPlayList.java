@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,41 +45,40 @@ public class FragmentPlayList extends Fragment {
     private void GetData() { // cấu hình lại retrofit, gửi lên cho server
         DataService dataService = APIService.getService();
         Call<List<PlayList>> callback = dataService.GetPlayListCurrentDay();
-        System.out.println("abc");
         callback.enqueue(new Callback<List<PlayList>>() { // implement 2 sự kiện lắng nghe và thất bại
             @Override
             public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
                 list = response.body();
                 playListAdapter = new PlayListAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
                 listViewPlayList.setAdapter(playListAdapter);
-
+                System.out.println(list.size());
             }
 
             @Override
             public void onFailure(Call<List<PlayList>> call, Throwable t) {
-
+                System.out.println(t.getMessage());
             }
         });
-        setListViewHeightBasedOnChildren(listViewPlayList);
+//        setListViewHeightBasedOnChildren(listViewPlayList);
     }
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
+//    public static void setListViewHeightBasedOnChildren(ListView listView) {
+//        ListAdapter listAdapter = listView.getAdapter();
+//        if (listAdapter == null) {
+//            // pre-condition
+//            return;
+//        }
+//
+//        int totalHeight = 0;
+//        for (int i = 0; i < listAdapter.getCount(); i++) {
+//            View listItem = listAdapter.getView(i, null, listView);
+//            listItem.measure(0, 0);
+//            totalHeight += listItem.getMeasuredHeight();
+//        }
+//
+//        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+//        listView.setLayoutParams(params);
+//        listView.requestLayout();
+//    }
 
 }

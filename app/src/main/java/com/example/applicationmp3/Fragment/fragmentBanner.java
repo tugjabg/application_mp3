@@ -77,7 +77,7 @@ public class fragmentBanner extends Fragment {
             @Override
             public void onFailure(Call<List<Quangcao>> call, Throwable t) {
                 // cấu trúc viết sai || không có data trả về || kết nối thất bại
-
+                System.out.println(t.getMessage());
             }
         });
 

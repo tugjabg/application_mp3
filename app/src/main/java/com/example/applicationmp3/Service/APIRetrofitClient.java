@@ -19,19 +19,25 @@ public class APIRetrofitClient {
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(String base_url){ // trả về cấu hình sau khi thực hiện xong retrofit, truyền vào một url link tới server
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(10000, TimeUnit.MILLISECONDS) // tgian mà ngắt kết nối khi server không phản hồi
-                .writeTimeout(10000, TimeUnit.MILLISECONDS) //
-                .connectTimeout(10000, TimeUnit.MILLISECONDS) // thời gian trả lời kết nối
-                .retryOnConnectionFailure(true) // cố gắng kết nối lại
-                .protocols(Arrays.asList(Protocol.HTTP_1_1)) // giao thức
-                .build(); // => kiểm tra giao thức
-        Gson gson = new GsonBuilder().setLenient().create(); // API, convert các từ khóa API thành interface của java
-        retrofit = new Retrofit.Builder()
+//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .readTimeout(10000, TimeUnit.MILLISECONDS) // tgian mà ngắt kết nối khi server không phản hồi
+//                .writeTimeout(10000, TimeUnit.MILLISECONDS) //
+//                .connectTimeout(10000, TimeUnit.MILLISECONDS) // thời gian trả lời kết nối
+//                .retryOnConnectionFailure(true) // cố gắng kết nối lại
+//                .protocols(Arrays.asList(Protocol.HTTP_1_1)) // giao thức
+//                .build(); // => kiểm tra giao thức
+//        Gson gson = new GsonBuilder().setLenient().create(); // API, convert các từ khóa API thành interface của java
+//        retrofit = new Retrofit.Builder()
+//                    .baseUrl(base_url)
+//                    .client(okHttpClient)
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .build();
+        if (retrofit==null) {
+            retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
+        }
         return retrofit;
     }
 

@@ -24,6 +24,12 @@
             android:layout_width="match_parent"
             android:id="@+id/fragmentChuDeTheLoai"
             android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.applicationmp3.Fragment.FragmentAlbumHot"
+            android:layout_width="match_parent"
+            android:id="@+id/fragmentAlbumHot"
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 

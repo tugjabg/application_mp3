@@ -84,12 +84,13 @@ public class fragmentChudeTheLoai extends Fragment {
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);  // đưa cardview vào trong linearLayout
                 }
+                System.out.println(chuDeTheLoai.getTheLoai());
                 horizontalScrollView.addView(linearLayout);
             }
 
             @Override
             public void onFailure(Call<ChuDeTheLoai> call, Throwable t) {
-
+                System.out.println(t.getMessage());
             }
         });
 
