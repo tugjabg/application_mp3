@@ -24,6 +24,7 @@ public class PlayListAdapter extends ArrayAdapter<PlayList> {
         super(context, resource, objects);
 
     }
+
     class ViewHolder{
         TextView txtTenPlayList;
         ImageView imgBackGround, imgPlayList;

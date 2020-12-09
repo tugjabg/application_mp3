@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgViewBaiHatHot"
+        android:scaleType="fitXY"
+        android:layout_margin="4dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+    <TextView
+        android:text="Ten Bai Hat"
+        android:layout_toRightOf="@id/imgViewBaiHatHot"
+        android:layout_margin="5dp"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:textColor="#363636"
+        android:id="@+id/txtViewTenBaiHatHot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Ca si"
+        android:layout_toRightOf="@id/imgViewBaiHatHot"
+        android:layout_margin="5dp"
+        android:maxLines="1"
+        android:textColor="#303030"
+        android:textSize="18sp"
+        android:layout_below="@id/txtViewTenBaiHatHot"
+        android:id="@+id/txtViewTenCaSiBaiHatHot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_margin="10dp"
+        android:src="@drawable/iconlove"
+        android:id="@+id/imgViewYeuThich"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+</RelativeLayout>

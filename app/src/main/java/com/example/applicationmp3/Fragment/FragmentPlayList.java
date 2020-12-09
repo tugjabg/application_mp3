@@ -1,16 +1,21 @@
 package com.example.applicationmp3.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.applicationmp3.Activity.DanhSachBaiHatActivity;
 import com.example.applicationmp3.Adapter.PlayListAdapter;
 import com.example.applicationmp3.Model.PlayList;
 import com.example.applicationmp3.R;
@@ -51,7 +56,16 @@ public class FragmentPlayList extends Fragment {
                 list = response.body();
                 playListAdapter = new PlayListAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
                 listViewPlayList.setAdapter(playListAdapter);
-                System.out.println(list.size());
+                setListViewHeightBasedOnChildren(listViewPlayList);
+                listViewPlayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        System.out.println("00000000000000000000000000000000000000000000000000000000000");
+                        Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
+                        intent.putExtra("itemPlayList", list.get(position));
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -61,24 +75,24 @@ public class FragmentPlayList extends Fragment {
         });
 //        setListViewHeightBasedOnChildren(listViewPlayList);
     }
-//    public static void setListViewHeightBasedOnChildren(ListView listView) {
-//        ListAdapter listAdapter = listView.getAdapter();
-//        if (listAdapter == null) {
-//            // pre-condition
-//            return;
-//        }
-//
-//        int totalHeight = 0;
-//        for (int i = 0; i < listAdapter.getCount(); i++) {
-//            View listItem = listAdapter.getView(i, null, listView);
-//            listItem.measure(0, 0);
-//            totalHeight += listItem.getMeasuredHeight();
-//        }
-//
-//        ViewGroup.LayoutParams params = listView.getLayoutParams();
-//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-//        listView.setLayoutParams(params);
-//        listView.requestLayout();
-//    }
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 
 }

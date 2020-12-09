@@ -54,7 +54,6 @@ public class fragmentBanner extends Fragment {
             public void onResponse(Call<List<Quangcao>> call, Response<List<Quangcao>> response) { // có kết quả trả về
                 List<Quangcao> quangcaoList = response.body(); // lấy dữ liệu trong kq trả về từ server
                 BannerAdapter bannerAdapter;
-                System.out.println(quangcaoList.size());
                 bannerAdapter = new BannerAdapter(getActivity(), quangcaoList);
                 viewPager.setAdapter(bannerAdapter);
                 circleIndicator.setViewPager(viewPager);
