@@ -19,6 +19,7 @@ import com.example.applicationmp3.Adapter.DanhSachBaiHatAdapter;
 import com.example.applicationmp3.Model.BaiHat;
 import com.example.applicationmp3.Model.PlayList;
 import com.example.applicationmp3.Model.Quangcao;
+import com.example.applicationmp3.Model.TheLoai;
 import com.example.applicationmp3.R;
 import com.example.applicationmp3.Service.APIService;
 import com.example.applicationmp3.Service.DataService;
@@ -45,6 +46,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     Quangcao quangcao;
     PlayList playList;
     List<BaiHat> listBaiHat;
+    TheLoai theLoai;
     DanhSachBaiHatAdapter danhSachBaiHatAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         mapping();
         init();
         if (quangcao != null && quangcao.getTenbaihat().equals("")){
+            System.out.println("000000000000");
             try {
                 setValueInView(quangcao.getTenbaihat(), quangcao.getHinhanh());
             } catch (IOException e) {
@@ -64,12 +67,39 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         if (playList != null && playList.getTen().equals("")){
             try {
                 setValueInView(playList.getTen(), playList.getHinhPlaylist());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
             getDataPlayList(playList.getIdPlaylist());
         }
+        if (theLoai != null){
+            try {
+                setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            getDataTheLoai(theLoai.getIdTheLoai());
+        }
+    }
+
+    private void getDataTheLoai(String idTheLoai) {
+        DataService dataService = APIService.getService();
+        Call<List<BaiHat>> callback = dataService.getDanhSachBaiHatTheoTheLoai(idTheLoai);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                listBaiHat = response.body();
+                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void getDataPlayList(String idPlayList) {
@@ -79,6 +109,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 listBaiHat = response.body();
+                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
                 recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
                 recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
             }
@@ -97,6 +128,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 listBaiHat = response.body();
+                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
                 recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
                 recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
             }
@@ -145,6 +177,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("itemPlayList")){
                 playList = (PlayList) intent.getSerializableExtra("itemPlayList");
+            }
+            if (intent.hasExtra("idtheloai")){
+                theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
             }
         }
     }

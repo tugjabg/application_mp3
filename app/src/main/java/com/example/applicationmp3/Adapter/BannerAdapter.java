@@ -54,6 +54,7 @@ public class BannerAdapter extends PagerAdapter {
         Picasso.with(context).load(quangcaoList.get(position).getHinhbaihat()).into(imgSongBanner);
         txtViewTitle.setText(quangcaoList.get(position).getTenbaihat());
         txtContent.setText(quangcaoList.get(position).getNoidung());
+        container.addView(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,13 +63,12 @@ public class BannerAdapter extends PagerAdapter {
                 context.startActivity(intent);
             }
         });
-        container.addView(view);
         return view;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
-        super.destroyItem(container, position, object);
+        //super.destroyItem(container, position, object);
     }
 }

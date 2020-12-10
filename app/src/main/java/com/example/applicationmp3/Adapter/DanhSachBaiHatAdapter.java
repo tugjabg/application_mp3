@@ -35,7 +35,16 @@ public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAd
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         BaiHat baiHat = baiHats.get(position);
-        holder.txtcasi.setText(baiHat.getCasi());
+        if (baiHat.getCasi() == null){
+            baiHat.setCasi("a");
+        }
+        if (baiHat.getTenBaiHat()==null){
+            baiHat.setTenBaiHat("");
+        }
+        if (baiHat.getHinhBaiHat() == null){
+            baiHat.setHinhBaiHat("0");
+        }
+        holder.txtcasi.setText(baiHat.getTenBaiHat());
         holder.txttenbaihat.setText(baiHat.getTenBaiHat());
         holder.txtIndex.setText((position+1)+".");
     }
@@ -51,7 +60,7 @@ public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAd
             super(itemView);
             txtIndex = itemView.findViewById(R.id.txtViewDanhSachIndex);
             txttenbaihat = itemView.findViewById(R.id.txtViewTenBaiHat);
-            txtcasi = itemView.findViewById(R.id.txtTenCaSi);
+            txtcasi = itemView.findViewById(R.id.tenCasiCuaBaiHat);
         }
     }
 }

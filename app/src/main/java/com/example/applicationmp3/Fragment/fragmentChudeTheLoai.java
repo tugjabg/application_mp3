@@ -1,5 +1,6 @@
 package com.example.applicationmp3.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.applicationmp3.Activity.DanhSachBaiHatActivity;
+import com.example.applicationmp3.Activity.DanhSachTatCaChuDeActivity;
 import com.example.applicationmp3.Model.ChuDe;
 import com.example.applicationmp3.Model.ChuDeTheLoai;
 import com.example.applicationmp3.Model.TheLoai;
@@ -40,6 +43,13 @@ public class fragmentChudeTheLoai extends Fragment {
         view = inflater.inflate(R.layout.fragment_chude_theloai, container, false);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView); // ánh xạ horizontalScrollView
         xemThem = view.findViewById(R.id.xemThem); // ánh xạ cái view xem thêm
+        xemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DanhSachTatCaChuDeActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData(); // lấy dữ liệu từ API
         return view;
     }
@@ -83,8 +93,16 @@ public class fragmentChudeTheLoai extends Fragment {
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);  // đưa cardview vào trong linearLayout
+                    int finalI = i;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
+                            intent.putExtra("idtheloai", theLoaiList.get(finalI));
+                            startActivity(intent);
+                        }
+                    });
                 }
-                System.out.println(chuDeTheLoai.getTheLoai());
                 horizontalScrollView.addView(linearLayout);
             }
 

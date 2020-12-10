@@ -2,6 +2,7 @@ package com.example.applicationmp3.Service;
 
 import com.example.applicationmp3.Model.Album;
 import com.example.applicationmp3.Model.BaiHat;
+import com.example.applicationmp3.Model.ChuDe;
 import com.example.applicationmp3.Model.ChuDeTheLoai;
 import com.example.applicationmp3.Model.PlayList;
 import com.example.applicationmp3.Model.Quangcao;
@@ -31,4 +32,9 @@ public interface DataService { // lấy data từ service
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
     Call<List<BaiHat>> getDanhSachBaiHatTheoPlayList(@Field("idplaylist") String idplaylist);
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHat>> getDanhSachBaiHatTheoTheLoai(@Field("idtheloai") String idtheloai);
+    @GET("tatcachude.php")
+    Call<List<ChuDe>> getTatCaChuDe();
 }

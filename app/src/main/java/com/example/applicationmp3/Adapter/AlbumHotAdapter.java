@@ -55,7 +55,7 @@ public class AlbumHotAdapter extends RecyclerView.Adapter<AlbumHotAdapter.ViewHo
             super(itemView);
             imgAlbum = itemView.findViewById(R.id.imgAlbum);
             tenAlbum = itemView.findViewById(R.id.txtViewNameAlbum);
-            caSiAlbum = itemView.findViewById(R.id.txtTenCaSi);
+            caSiAlbum = itemView.findViewById(R.id.txttencasi);
         }
     }
 }

@@ -29,6 +29,7 @@
             android:textSize="18sp"
             android:textColor="#979797"
             android:maxLines="1"
+            android:id="@+id/tenCasiCuaBaiHat"
             android:ellipsize="end"
             android:layout_toRightOf="@id/txtViewDanhSachIndex"
             android:layout_below="@id/txtViewTenBaiHat"

@@ -60,7 +60,6 @@ public class FragmentPlayList extends Fragment {
                 listViewPlayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        System.out.println("00000000000000000000000000000000000000000000000000000000000");
                         Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
                         intent.putExtra("itemPlayList", list.get(position));
                         getActivity().startActivity(intent);

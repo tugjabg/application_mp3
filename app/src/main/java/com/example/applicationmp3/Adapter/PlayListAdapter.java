@@ -22,13 +22,11 @@ public class PlayListAdapter extends ArrayAdapter<PlayList> {
 
     public PlayListAdapter(@NonNull Context context, int resource, @NonNull List<PlayList> objects) {
         super(context, resource, objects);
-
     }
 
     class ViewHolder{
         TextView txtTenPlayList;
         ImageView imgBackGround, imgPlayList;
-
     }
 
     @NonNull
