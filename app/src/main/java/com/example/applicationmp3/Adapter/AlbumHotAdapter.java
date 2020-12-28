@@ -1,6 +1,7 @@
 package com.example.applicationmp3.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applicationmp3.Activity.DanhSachBaiHatActivity;
 import com.example.applicationmp3.Model.Album;
 import com.example.applicationmp3.R;
 import com.squareup.picasso.Picasso;
@@ -56,6 +58,14 @@ public class AlbumHotAdapter extends RecyclerView.Adapter<AlbumHotAdapter.ViewHo
             imgAlbum = itemView.findViewById(R.id.imgAlbum);
             tenAlbum = itemView.findViewById(R.id.txtViewNameAlbum);
             caSiAlbum = itemView.findViewById(R.id.txttencasi);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, DanhSachBaiHatActivity.class);
+                    intent.putExtra("album", list.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

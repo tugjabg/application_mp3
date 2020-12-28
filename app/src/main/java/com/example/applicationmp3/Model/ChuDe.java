@@ -39,4 +39,12 @@ public void setHinhAnhChuDe(String hinhAnhChuDe) {
 this.hinhAnhChuDe = hinhAnhChuDe;
 }
 
+    @Override
+    public String toString() {
+        return "ChuDe{" +
+                "idKeyChuDe='" + idKeyChuDe + '\'' +
+                ", tenChuDe='" + tenChuDe + '\'' +
+                ", hinhAnhChuDe='" + hinhAnhChuDe + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.applicationmp3.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applicationmp3.Activity.PlayMusicActivity;
 import com.example.applicationmp3.Model.BaiHat;
 import com.example.applicationmp3.R;
 import com.squareup.picasso.Picasso;
@@ -55,6 +57,14 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.view
             txtCasi = itemView.findViewById(R.id.txtViewTenCaSiBaiHatHot);
             hinh = itemView.findViewById(R.id.imgViewBaiHatHot);
             yeuthich = itemView.findViewById(R.id.imgViewYeuThich);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlayMusicActivity.class);
+                    intent.putExtra("cakhuc", baiHatList.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

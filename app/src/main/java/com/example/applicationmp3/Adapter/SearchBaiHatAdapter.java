@@ -2,12 +2,11 @@ package com.example.applicationmp3.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,63 +14,57 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.applicationmp3.Activity.PlayMusicActivity;
 import com.example.applicationmp3.Model.BaiHat;
 import com.example.applicationmp3.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAdapter.viewHolder> {
+public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.viewHolder>{
     Context context;
-    List<BaiHat> baiHats;
+    List<BaiHat> list;
 
-    public DanhSachBaiHatAdapter(Context context, List<BaiHat> baiHats) {
+    public SearchBaiHatAdapter(Context context, List<BaiHat> list) {
         this.context = context;
-        this.baiHats = baiHats;
+        this.list = list;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.dong_danh_sach_bai_het, parent, false);
+        View view = layoutInflater.inflate(R.layout.dong_search_bai_hat, parent, false);
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        BaiHat baiHat = baiHats.get(position);
-        if (baiHat.getCasi() == null){
-            baiHat.setCasi("a");
-        }
-        if (baiHat.getTenBaiHat()==null){
-            baiHat.setTenBaiHat("");
-        }
-        if (baiHat.getHinhBaiHat() == null){
-            baiHat.setHinhBaiHat("0");
-        }
-        holder.txtcasi.setText(baiHat.getTenBaiHat());
-        holder.txttenbaihat.setText(baiHat.getTenBaiHat());
-        holder.txtIndex.setText((position+1)+".");
+        BaiHat baiHat = list.get(position);
+        Picasso.with(context).load(baiHat.getHinhBaiHat()).into(holder.imageView);
+        holder.tencasi.setText(baiHat.getCasi());
+        holder.tenbaihat.setText(baiHat.getTenBaiHat());
     }
 
     @Override
     public int getItemCount() {
-        return baiHats.size();
+        return list.size();
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
-        TextView txtIndex, txttenbaihat, txtcasi;
+        TextView tenbaihat, tencasi;
+        ImageView imageView;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            txtIndex = itemView.findViewById(R.id.txtViewDanhSachIndex);
-            txttenbaihat = itemView.findViewById(R.id.txtViewTenBaiHat);
-            txtcasi = itemView.findViewById(R.id.tenCasiCuaBaiHat);
+            tenbaihat = itemView.findViewById(R.id.txtSearchTenBaiHat);
+            tencasi = itemView.findViewById(R.id.tenCaSiSearch);
+            imageView = itemView.findViewById(R.id.imgSearchBaiHat);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlayMusicActivity.class);
-                    intent.putExtra("cakhuc", baiHats.get(getPosition()));
+                    intent.putExtra("cakhuc", list.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
         }
+
     }
 }
