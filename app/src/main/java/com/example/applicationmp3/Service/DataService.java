@@ -14,13 +14,12 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
-public interface DataService { // lấy data từ service
-    @GET("songbanner.php") // lấy json về bằng phương thức get
+public interface DataService {
+    @GET("songbanner.php")
     Call<List<Quangcao>> GetDataBanner();
     @GET("playlistforcurrentday.php")
-    Call<List<PlayList>> GetPlayListCurrentDay(); // getPlayListCurrent giống như tên function để nhận dữ liệu
+    Call<List<PlayList>> GetPlayListCurrentDay();
     @GET("chudeTheLoai.php")
     Call<ChuDeTheLoai> GetChuDeTheLoai();
     @GET("albumHot.php")
@@ -47,3 +46,4 @@ public interface DataService { // lấy data từ service
     @POST("searchbaihat.php")
     Call<List<BaiHat>> getSearchBaiHat(@Field("tukhoa") String tukhoa);
 }
+

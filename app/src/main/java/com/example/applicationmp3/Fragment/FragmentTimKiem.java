@@ -61,7 +61,7 @@ public class FragmentTimKiem extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //searchTuKhoaBaiHat(query);
+                searchTuKhoaBaiHat(query);
                 return false;
             }
 

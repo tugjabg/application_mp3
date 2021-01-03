@@ -18,15 +18,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIRetrofitClient {
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(String base_url){ // trả về cấu hình sau khi thực hiện xong retrofit, truyền vào một url link tới server
+    public static Retrofit getClient(String base_url){
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(10000, TimeUnit.MILLISECONDS) // tgian mà ngắt kết nối khi server không phản hồi
-                .writeTimeout(10000, TimeUnit.MILLISECONDS) //
-                .connectTimeout(10000, TimeUnit.MILLISECONDS) // thời gian trả lời kết nối
+                .readTimeout(10000, TimeUnit.MILLISECONDS)
+                .writeTimeout(10000, TimeUnit.MILLISECONDS)
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true) // cố gắng kết nối lại
                 .protocols(Arrays.asList(Protocol.HTTP_1_1)) // giao thức
                 .build(); // => kiểm tra giao thức
-        Gson gson = new GsonBuilder().setLenient().create(); // API, convert các từ khóa API thành interface của java
+        Gson gson = new GsonBuilder().setLenient().create();
         retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
                     .client(okHttpClient)
@@ -40,5 +40,6 @@ public class APIRetrofitClient {
         }
         return retrofit;
     }
-
 }
+
+

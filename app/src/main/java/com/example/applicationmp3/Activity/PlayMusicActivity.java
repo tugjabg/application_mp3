@@ -65,6 +65,39 @@ public class PlayMusicActivity extends AppCompatActivity {
                 };
             }
         },500);
+        imgPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                    imgPlay.setImageResource(R.drawable.iconplay);
+                }else {
+                    mediaPlayer.start();
+                    imgPlay.setImageResource(R.drawable.iconpause);
+                }
+            }
+        });
+        imgRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
     }
 
     private void getDataFromIntent() {
@@ -93,6 +126,8 @@ public class PlayMusicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                mediaPlayer.stop();
+                mangBaiHat.clear();
             }
         });
         toolbarPlayMusic.setTitleTextColor(Color.WHITE);
@@ -102,10 +137,12 @@ public class PlayMusicActivity extends AppCompatActivity {
         viewPagerPlayListNhac.addFragment(fragmentDiaNhac);
         viewPagerPlayListNhac.addFragment(fragmentPlayBaiHat);
         viewPager.setAdapter(viewPagerPlayListNhac);
-//        fragmentDiaNhac = (FragmentDiaNhac) viewPagerPlayListNhac.getItem(1);
-        getSupportActionBar().setTitle(mangBaiHat.get(0).getTenBaiHat());
-        new PlayMp3().execute(mangBaiHat.get(0).getLinkbaihat());
-        imgPlay.setImageResource(R.drawable.iconpause);
+        fragmentDiaNhac = (FragmentDiaNhac) viewPagerPlayListNhac.getItem(0);
+        if (mangBaiHat.size() > 0){
+            getSupportActionBar().setTitle(mangBaiHat.get(0).getTenBaiHat());
+            new PlayMp3().execute(mangBaiHat.get(0).getLinkbaihat());
+            imgPlay.setImageResource(R.drawable.iconpause);
+        }
     }
     class PlayMp3 extends AsyncTask<String, Void, String>{
         @Override
@@ -125,7 +162,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                 }
             });
             try {
-                mediaPlayer.setDataSource(s);
+                mediaPlayer.setDataSource(s);// khởi tạo đường link từ ca khúc
                 mediaPlayer.prepare(); // dùng để phát bài hát
             } catch (IOException e) {
                 e.printStackTrace();
@@ -134,7 +171,6 @@ public class PlayMusicActivity extends AppCompatActivity {
             TimeSong();
         }
     }
-
     private void TimeSong() {
         SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("mm:ss");
         txtTotalSong.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
